@@ -35,6 +35,22 @@ export type DynatraceProblem = {
   affectedEntities: Array<DynatraceEntity>;
 };
 
+export type DynatraceVulnerability = {
+  securityProblemId: string;
+  displayId: string;
+  status: string;
+  muted: boolean;
+  externalVulnerability: string;
+  vulnerabilityType: string;
+  title: string;
+  packageName: string;
+  url: string;
+  technology: string;
+  firstSeenTimestamp: number;
+  lastUpdatedTimestamp: number;
+  cveIds: Array<string>;
+};
+
 type SyntheticRequestResults = {
   startTimestamp: number;
 };
@@ -63,6 +79,12 @@ export interface DynatraceProblems {
   pageSize: number;
 }
 
+export interface DynatraceVulnerabilities {
+  vulnerabilities: Array<DynatraceVulnerability>;
+  totalCount: number;
+  pageSize: number;
+}
+
 export const dynatraceApiRef = createApiRef<DynatraceApi>({
   id: 'plugin.dynatrace.service',
 });
@@ -77,4 +99,7 @@ export type DynatraceApi = {
   getDynatraceSyntheticLocationInfo(
     syntheticLocationId: string,
   ): Promise<DynatraceSyntheticLocationInfo | undefined>;
+  getDynatraceVulnerabilities(
+    dynatraceEntityId: string,
+  ): Promise<DynatraceVulnerabilities | undefined>;
 };

@@ -18,6 +18,7 @@ import {
   DynatraceApi,
   DynatraceSyntheticResults,
   DynatraceSyntheticLocationInfo,
+  DynatraceVulnerabilities,
 } from './DynatraceApi';
 import { DiscoveryApi, FetchApi } from '@backstage/core-plugin-api';
 
@@ -91,6 +92,18 @@ export class DynatraceClient implements DynatraceApi {
     }
 
     return this.callApi('problems', {
+      entitySelector: `entityId(${dynatraceEntityId})`,
+    });
+  }
+
+  async getDynatraceVulnerabilities(
+    dynatraceEntityId: string,
+  ): Promise<DynatraceVulnerabilities | undefined> {
+    if (!dynatraceEntityId) {
+      throw new Error('Dynatrace entity id is required');
+    }
+
+    return this.callApi('securityProblems', {
       entitySelector: `entityId(${dynatraceEntityId})`,
     });
   }
