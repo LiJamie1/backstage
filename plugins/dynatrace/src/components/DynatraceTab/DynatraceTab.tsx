@@ -28,6 +28,7 @@ import {
   DYNATRACE_ID_ANNOTATION,
   DYNATRACE_SYNTHETICS_ANNOTATION,
 } from '../../constants';
+import { VulnerabilitiesList } from '../Vulnerabilities/VulnerabilitiesList';
 
 export const DynatraceTab = () => {
   const { entity } = useEntity();
@@ -49,6 +50,13 @@ export const DynatraceTab = () => {
           {dynatraceEntityId ? (
             <Grid item xs={12} lg={12}>
               <ProblemsList dynatraceEntityId={dynatraceEntityId} />
+            </Grid>
+          ) : (
+            ''
+          )}
+          {dynatraceEntityId ? (
+            <Grid item xs={12} lg={12}>
+              <VulnerabilitiesList dynatraceEntityId={dynatraceEntityId} />
             </Grid>
           ) : (
             ''
