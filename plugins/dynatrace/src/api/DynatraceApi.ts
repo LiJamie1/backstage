@@ -37,18 +37,11 @@ export type DynatraceProblem = {
 
 export type DynatraceVulnerability = {
   securityProblemId: string;
-  displayId: string;
   status: string;
-  muted: boolean;
-  externalVulnerability: string;
   vulnerabilityType: string;
   title: string;
-  packageName: string;
-  url: string;
-  technology: string;
   firstSeenTimestamp: number;
   lastUpdatedTimestamp: number;
-  cveIds: Array<string>;
 };
 
 type SyntheticRequestResults = {
