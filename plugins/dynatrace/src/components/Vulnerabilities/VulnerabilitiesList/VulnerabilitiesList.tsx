@@ -54,6 +54,7 @@ export const VulnerabilitiesList = (props: VulnerabilitiesListProps) => {
       githubSlug,
       'EXPOSED',
       'false',
+      500,
     );
   }, [dynatraceApi, githubSlug]);
   const vulnerabilities = value?.vulnerabilities;

@@ -100,13 +100,14 @@ export class DynatraceClient implements DynatraceApi {
     githubSlug: string,
     riskAssessment: string,
     muted: string,
+    pageSize: number,
   ): Promise<DynatraceVulnerabilities | undefined> {
     if (!githubSlug) {
       throw new Error('Dynatrace entity id is required');
     }
 
     return this.callApi('securityProblems', {
-      affectedPgNameContains: `riskAssessment(${riskAssessment})%2Cmuted(${muted})%2CaffectedPgNameContains(${githubSlug})`,
+      affectedPgNameContains: `?pageSize=${pageSize}&securityProblemSelector=riskAssessment(${riskAssessment})%2Cmuted(${muted})%2CaffectedPgNameContains(${githubSlug})`,
     });
   }
 }

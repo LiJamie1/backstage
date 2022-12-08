@@ -96,5 +96,6 @@ export type DynatraceApi = {
     githubSlug: string,
     riskAssessment: string,
     muted: string,
+    pageSize: number,
   ): Promise<DynatraceVulnerabilities | undefined>;
 };
