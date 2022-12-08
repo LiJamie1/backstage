@@ -93,6 +93,8 @@ export type DynatraceApi = {
     syntheticLocationId: string,
   ): Promise<DynatraceSyntheticLocationInfo | undefined>;
   getDynatraceVulnerabilities(
-    dynatraceEntityId: string,
+    githubSlug: string,
+    riskAssessment: string,
+    muted: string,
   ): Promise<DynatraceVulnerabilities | undefined>;
 };

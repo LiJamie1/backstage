@@ -37,6 +37,9 @@ export const DynatraceTab = () => {
     return <MissingAnnotationEmptyState annotation={DYNATRACE_ID_ANNOTATION} />;
   }
 
+  const githubSlug: string =
+    entity?.metadata.annotations?.['github.com/project-slug'].split('/')[1]!;
+
   const dynatraceEntityId: string =
     entity?.metadata.annotations?.[DYNATRACE_ID_ANNOTATION]!;
 
@@ -56,7 +59,7 @@ export const DynatraceTab = () => {
           )}
           {dynatraceEntityId ? (
             <Grid item xs={12} lg={12}>
-              <VulnerabilitiesList dynatraceEntityId={dynatraceEntityId} />
+              <VulnerabilitiesList githubSlug={githubSlug} />
             </Grid>
           ) : (
             ''

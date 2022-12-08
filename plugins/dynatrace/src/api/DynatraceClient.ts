@@ -97,14 +97,16 @@ export class DynatraceClient implements DynatraceApi {
   }
 
   async getDynatraceVulnerabilities(
-    dynatraceEntityId: string,
+    githubSlug: string,
+    riskAssessment: string,
+    muted: string,
   ): Promise<DynatraceVulnerabilities | undefined> {
-    if (!dynatraceEntityId) {
+    if (!githubSlug) {
       throw new Error('Dynatrace entity id is required');
     }
 
     return this.callApi('securityProblems', {
-      entitySelector: `entityId(${dynatraceEntityId})`,
+      affectedPgNameContains: `riskAssessment(${riskAssessment})%2Cmuted(${muted})%2CaffectedPgNameContains(${githubSlug})`,
     });
   }
 }

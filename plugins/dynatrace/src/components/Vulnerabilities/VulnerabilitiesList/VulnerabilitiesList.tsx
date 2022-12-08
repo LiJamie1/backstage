@@ -26,7 +26,7 @@ import { dynatraceApiRef, DynatraceVulnerability } from '../../../api';
 import { InfoCard } from '@backstage/core-components';
 
 type VulnerabilitiesListProps = {
-  dynatraceEntityId: string;
+  githubSlug: string;
 };
 
 const cardContents = (
@@ -44,14 +44,18 @@ const cardContents = (
 };
 
 export const VulnerabilitiesList = (props: VulnerabilitiesListProps) => {
-  const { dynatraceEntityId } = props;
+  const { githubSlug } = props;
   const configApi = useApi(configApiRef);
   const dynatraceApi = useApi(dynatraceApiRef);
   const dynatraceBaseUrl = configApi.getString('dynatrace.baseUrl');
 
   const { value, loading, error } = useAsync(async () => {
-    return dynatraceApi.getDynatraceVulnerabilities(dynatraceEntityId);
-  }, [dynatraceApi, dynatraceEntityId]);
+    return dynatraceApi.getDynatraceVulnerabilities(
+      githubSlug,
+      'EXPOSED',
+      'false',
+    );
+  }, [dynatraceApi, githubSlug]);
   const vulnerabilities = value?.vulnerabilities;
 
   if (loading) {
@@ -61,10 +65,7 @@ export const VulnerabilitiesList = (props: VulnerabilitiesListProps) => {
   }
 
   return (
-    <InfoCard
-      title="Vulnerabilities"
-      subheader={`Last 2 Hours - ${dynatraceEntityId}`}
-    >
+    <InfoCard title="Vulnerabilities" subheader={`${githubSlug}`}>
       {cardContents(vulnerabilities || [], dynatraceBaseUrl)}
     </InfoCard>
   );
