@@ -41,7 +41,7 @@ export type DynatraceVulnerability = {
   vulnerabilityType: string;
   title: string;
   firstSeenTimestamp: number;
-  lastUpdatedTimestamp: number;
+  url: string;
 };
 
 type SyntheticRequestResults = {

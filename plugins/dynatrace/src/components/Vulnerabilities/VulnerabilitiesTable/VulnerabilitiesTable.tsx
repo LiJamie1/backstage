@@ -29,17 +29,13 @@ const parseTimestamp = (timestamp: number | undefined) => {
 };
 
 export const VulnerabilitiesTable = (props: VulnerabilityTableProps) => {
-  const { vulnerabilities, dynatraceBaseUrl } = props;
+  const { vulnerabilities } = props;
   const columns: TableColumn[] = [
     {
       title: 'Title',
       field: 'title',
       render: (row: Partial<DynatraceVulnerability>) => (
-        <Link
-          to={`${dynatraceBaseUrl}/#securityProblems/problemdetails;pid=${row.securityProblemId}`}
-        >
-          {row.title}
-        </Link>
+        <Link to={`${row.url}`}>{row.title}</Link>
       ),
     },
     {
@@ -59,12 +55,6 @@ export const VulnerabilitiesTable = (props: VulnerabilityTableProps) => {
       field: 'firstSeenTimestamp',
       render: (row: Partial<DynatraceVulnerability>) =>
         parseTimestamp(row.firstSeenTimestamp),
-    },
-    {
-      title: 'Last Update',
-      field: 'lastUpdatedTimestamp',
-      render: (row: Partial<DynatraceVulnerability>) =>
-        parseTimestamp(row.lastUpdatedTimestamp),
     },
   ];
 
