@@ -73,7 +73,7 @@ export interface DynatraceProblems {
 }
 
 export interface DynatraceVulnerabilities {
-  vulnerabilities: Array<DynatraceVulnerability>;
+  securityProblems: Array<DynatraceVulnerability>;
   totalCount: number;
   pageSize: number;
 }
@@ -96,6 +96,5 @@ export type DynatraceApi = {
     githubSlug: string,
     riskAssessment: string,
     muted: string,
-    pageSize: number,
   ): Promise<DynatraceVulnerabilities | undefined>;
 };

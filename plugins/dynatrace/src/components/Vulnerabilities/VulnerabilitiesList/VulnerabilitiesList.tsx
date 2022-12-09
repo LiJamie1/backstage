@@ -26,7 +26,7 @@ import { dynatraceApiRef, DynatraceVulnerability } from '../../../api';
 import { InfoCard } from '@backstage/core-components';
 
 type VulnerabilitiesListProps = {
-  githubSlug: string;
+  kubernetesId: string;
 };
 
 const cardContents = (
@@ -44,20 +44,19 @@ const cardContents = (
 };
 
 export const VulnerabilitiesList = (props: VulnerabilitiesListProps) => {
-  const { githubSlug } = props;
+  const { kubernetesId } = props;
   const configApi = useApi(configApiRef);
   const dynatraceApi = useApi(dynatraceApiRef);
   const dynatraceBaseUrl = configApi.getString('dynatrace.baseUrl');
 
   const { value, loading, error } = useAsync(async () => {
     return dynatraceApi.getDynatraceVulnerabilities(
-      githubSlug,
+      kubernetesId,
       'EXPOSED',
       'false',
-      500,
     );
-  }, [dynatraceApi, githubSlug]);
-  const vulnerabilities = value?.vulnerabilities;
+  }, [dynatraceApi, kubernetesId]);
+  const vulnerabilities = value?.securityProblems;
 
   if (loading) {
     return <Progress />;
@@ -66,7 +65,7 @@ export const VulnerabilitiesList = (props: VulnerabilitiesListProps) => {
   }
 
   return (
-    <InfoCard title="Vulnerabilities" subheader={`${githubSlug}`}>
+    <InfoCard title="Vulnerabilities" subheader={`${kubernetesId}`}>
       {cardContents(vulnerabilities || [], dynatraceBaseUrl)}
     </InfoCard>
   );

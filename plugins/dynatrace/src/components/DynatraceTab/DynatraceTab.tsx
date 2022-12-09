@@ -27,6 +27,7 @@ import { isDynatraceAvailable } from '../../plugin';
 import {
   DYNATRACE_ID_ANNOTATION,
   DYNATRACE_SYNTHETICS_ANNOTATION,
+  KUBERNETES_ID_ANNOTATION,
 } from '../../constants';
 import { VulnerabilitiesList } from '../Vulnerabilities/VulnerabilitiesList';
 
@@ -37,8 +38,8 @@ export const DynatraceTab = () => {
     return <MissingAnnotationEmptyState annotation={DYNATRACE_ID_ANNOTATION} />;
   }
 
-  const githubSlug: string =
-    entity?.metadata.annotations?.['github.com/project-slug'].split('/')[1]!;
+  const kubernetesId: string =
+    entity?.metadata.annotations?.[KUBERNETES_ID_ANNOTATION]!;
 
   const dynatraceEntityId: string =
     entity?.metadata.annotations?.[DYNATRACE_ID_ANNOTATION]!;
@@ -59,7 +60,7 @@ export const DynatraceTab = () => {
           )}
           {dynatraceEntityId ? (
             <Grid item xs={12} lg={12}>
-              <VulnerabilitiesList githubSlug={githubSlug} />
+              <VulnerabilitiesList kubernetesId={kubernetesId} />
             </Grid>
           ) : (
             ''

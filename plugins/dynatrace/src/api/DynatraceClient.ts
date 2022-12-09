@@ -97,17 +97,17 @@ export class DynatraceClient implements DynatraceApi {
   }
 
   async getDynatraceVulnerabilities(
-    githubSlug: string,
+    kubernetesId: string,
     riskAssessment: string,
     muted: string,
-    pageSize: number,
   ): Promise<DynatraceVulnerabilities | undefined> {
-    if (!githubSlug) {
+    if (!kubernetesId) {
       throw new Error('Dynatrace entity id is required');
     }
 
     return this.callApi('securityProblems', {
-      affectedPgNameContains: `?pageSize=${pageSize}&securityProblemSelector=riskAssessment(${riskAssessment})%2Cmuted(${muted})%2CaffectedPgNameContains(${githubSlug})`,
+      affectedPgNameContains: `securityProblemSelector=riskAssessment(${riskAssessment})%2Cmuted(${muted})%2CaffectedPgNameContains(${kubernetesId})`,
+      fields: '+riskAssessment,+managementZones',
     });
   }
 }
