@@ -46,9 +46,32 @@ export const VulnerabilitiesTable = (props: VulnerabilityTableProps) => {
       ),
     },
     {
+      title: 'Risk Level',
+      field: 'riskLevel',
+      render: (row: Partial<DynatraceVulnerability>) =>
+        row.riskAssessment?.riskLevel,
+    },
+    {
+      title: 'Exposure',
+      field: 'exposure',
+      render: (row: Partial<DynatraceVulnerability>) =>
+        row.riskAssessment?.exposure,
+    },
+    {
+      title: 'Data Assets',
+      field: 'dataAssets',
+      render: (row: Partial<DynatraceVulnerability>) =>
+        row.riskAssessment?.dataAssets,
+    },
+    {
       title: 'Vulnerability Type',
       field: 'vulnerabilityType',
       render: (row: Partial<DynatraceVulnerability>) => row.vulnerabilityType,
+    },
+    {
+      title: 'Package Name',
+      field: 'packageName',
+      render: (row: Partial<DynatraceVulnerability>) => row.packageName,
     },
     {
       title: 'Start Time',

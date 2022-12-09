@@ -35,13 +35,21 @@ export type DynatraceProblem = {
   affectedEntities: Array<DynatraceEntity>;
 };
 
+export type RiskAssessment = {
+  riskLevel: string;
+  exposure: string;
+  dataAssets: string;
+};
+
 export type DynatraceVulnerability = {
   securityProblemId: string;
   status: string;
   vulnerabilityType: string;
+  packageName: string;
   title: string;
   firstSeenTimestamp: number;
   url: string;
+  riskAssessment: Array<RiskAssessment>;
 };
 
 type SyntheticRequestResults = {
