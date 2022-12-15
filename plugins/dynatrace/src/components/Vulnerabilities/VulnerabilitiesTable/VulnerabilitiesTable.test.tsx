@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import React from 'react';
-import { VulnerabilitiesTable } from '.';
+import { VulnerabilitiesTable } from './VulnerabilitiesTable';
 import { renderInTestApp, TestApiRegistry } from '@backstage/test-utils';
 import { securityProblems } from '../../../mocks/securityProblems.json';
 import { ApiProvider, ConfigReader } from '@backstage/core-app-api';
