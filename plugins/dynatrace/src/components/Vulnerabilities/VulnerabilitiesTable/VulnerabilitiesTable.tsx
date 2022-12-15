@@ -69,11 +69,6 @@ export const VulnerabilitiesTable = (props: VulnerabilityTableProps) => {
       render: (row: Partial<DynatraceVulnerability>) => row.vulnerabilityType,
     },
     {
-      title: 'Package Name',
-      field: 'packageName',
-      render: (row: Partial<DynatraceVulnerability>) => row.packageName,
-    },
-    {
       title: 'Start Time',
       field: 'firstSeenTimestamp',
       render: (row: Partial<DynatraceVulnerability>) =>

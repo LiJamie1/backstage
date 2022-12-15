@@ -102,12 +102,13 @@ export class DynatraceClient implements DynatraceApi {
     muted: string,
   ): Promise<DynatraceVulnerabilities | undefined> {
     if (!kubernetesId) {
-      throw new Error('Dynatrace entity id is required');
+      throw new Error('KubernetesId is required');
     }
 
     return this.callApi('securityProblems', {
-      affectedPgNameContains: `securityProblemSelector=riskAssessment(${riskAssessment})%2Cmuted(${muted})%2CaffectedPgNameContains(${kubernetesId})`,
-      fields: '+riskAssessment,+managementZones',
+      pageSize: 500,
+      securityProblemSelector: `affectedPgNameContains(${kubernetesId}),muted(${muted}),riskAssessment(${riskAssessment})`,
+      fields: '+riskAssessment',
     });
   }
 }

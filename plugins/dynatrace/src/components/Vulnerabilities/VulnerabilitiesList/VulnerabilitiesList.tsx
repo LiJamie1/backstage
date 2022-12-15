@@ -57,7 +57,6 @@ export const VulnerabilitiesList = (props: VulnerabilitiesListProps) => {
     );
   }, [dynatraceApi, kubernetesId]);
   const vulnerabilities = value?.securityProblems;
-
   if (loading) {
     return <Progress />;
   } else if (error) {
