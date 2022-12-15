@@ -1,0 +1,45 @@
+{
+  "totalCount": 1,
+  "pageSize": 1,
+  "nextPageKey": "AQAAABQBAAAABQ==",
+  "securityProblems": [
+    {
+      "securityProblemId": "string",
+      "displayId": "string",
+      "status": "OPEN",
+      "muted": true,
+      "externalVulnerabilityId": "string",
+      "vulnerabilityType": "CODE_LEVEL",
+      "title": "this IS a big security problem",
+      "packageName": "string",
+      "url": "string",
+      "technology": "DOTNET",
+      "firstSeenTimestamp": 1,
+      "lastUpdatedTimestamp": 1,
+      "riskAssessment": {
+        "riskLevel": "CRITICAL",
+        "riskScore": 1,
+        "riskVector": "string",
+        "baseRiskLevel": "CRITICAL",
+        "baseRiskScore": 1,
+        "baseRiskVector": "string",
+        "exposure": "NOT_AVAILABLE",
+        "dataAssets": "NOT_AVAILABLE",
+        "publicExploit": "AVAILABLE",
+        "vulnerableFunctionUsage": "IN_USE",
+        "assessmentAccuracy": "FULL"
+      },
+      "managementZones": [
+        {
+          "name": "string",
+          "id": "string"
+        }
+      ],
+      "cveIds": ["string"],
+      "codeLevelVulnerabilityDetails": {
+        "processGroups": ["string"],
+        "vulnerabilityLocation": "string"
+      }
+    }
+  ]
+}
