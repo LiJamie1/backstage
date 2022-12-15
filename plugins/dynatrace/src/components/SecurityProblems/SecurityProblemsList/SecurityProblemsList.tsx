@@ -21,42 +21,42 @@ import {
   EmptyState,
 } from '@backstage/core-components';
 import { useApi, configApiRef } from '@backstage/core-plugin-api';
-import { VulnerabilitiesTable } from '../VulnerabilitiesTable';
-import { dynatraceApiRef, DynatraceVulnerability } from '../../../api';
+import { SecurityProblemsTable } from '../SecurityProblemsTable';
+import { dynatraceApiRef, DynatraceSecurityProblem } from '../../../api';
 import { InfoCard } from '@backstage/core-components';
 
-type VulnerabilitiesListProps = {
+type SecurityProblemsListProps = {
   kubernetesId: string;
 };
 
 const cardContents = (
-  vulnerabilities: DynatraceVulnerability[],
+  securityProblems: DynatraceSecurityProblem[],
   dynatraceBaseUrl: string,
 ) => {
-  return vulnerabilities.length ? (
-    <VulnerabilitiesTable
-      vulnerabilities={vulnerabilities || []}
+  return securityProblems.length ? (
+    <SecurityProblemsTable
+      securityProblems={securityProblems || []}
       dynatraceBaseUrl={dynatraceBaseUrl}
     />
   ) : (
-    <EmptyState title="No Vulnerabilities to Report!" missing="data" />
+    <EmptyState title="No Security Problems to Report!" missing="data" />
   );
 };
 
-export const VulnerabilitiesList = (props: VulnerabilitiesListProps) => {
+export const SecurityProblemsList = (props: SecurityProblemsListProps) => {
   const { kubernetesId } = props;
   const configApi = useApi(configApiRef);
   const dynatraceApi = useApi(dynatraceApiRef);
   const dynatraceBaseUrl = configApi.getString('dynatrace.baseUrl');
 
   const { value, loading, error } = useAsync(async () => {
-    return dynatraceApi.getDynatraceVulnerabilities(
+    return dynatraceApi.getDynatraceSecurityProblems(
       kubernetesId,
       'EXPOSED',
       'false',
     );
   }, [dynatraceApi, kubernetesId]);
-  const vulnerabilities = value?.securityProblems;
+  const securityProblems = value?.securityProblems;
   if (loading) {
     return <Progress />;
   } else if (error) {
@@ -64,8 +64,8 @@ export const VulnerabilitiesList = (props: VulnerabilitiesListProps) => {
   }
 
   return (
-    <InfoCard title="Vulnerabilities" subheader={`${kubernetesId}`}>
-      {cardContents(vulnerabilities || [], dynatraceBaseUrl)}
+    <InfoCard title="Security Problems" subheader={`${kubernetesId}`}>
+      {cardContents(securityProblems || [], dynatraceBaseUrl)}
     </InfoCard>
   );
 };

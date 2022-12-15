@@ -14,12 +14,12 @@
  * limitations under the License.
  */
 import React from 'react';
-import { DynatraceVulnerability } from '../../../api/DynatraceApi';
+import { DynatraceSecurityProblem } from '../../../api/DynatraceApi';
 import { StatusError, StatusOK } from '@backstage/core-components';
 
-export const VulnerabilityStatus = ({
+export const SecurityProblemStatus = ({
   status,
-}: Partial<DynatraceVulnerability>) => {
+}: Partial<DynatraceSecurityProblem>) => {
   switch (status?.toLocaleLowerCase()) {
     case 'open':
       return (

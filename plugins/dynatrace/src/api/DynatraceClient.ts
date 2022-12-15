@@ -18,7 +18,7 @@ import {
   DynatraceApi,
   DynatraceSyntheticResults,
   DynatraceSyntheticLocationInfo,
-  DynatraceVulnerabilities,
+  DynatraceSecurityProblems,
 } from './DynatraceApi';
 import { DiscoveryApi, FetchApi } from '@backstage/core-plugin-api';
 
@@ -96,11 +96,11 @@ export class DynatraceClient implements DynatraceApi {
     });
   }
 
-  async getDynatraceVulnerabilities(
+  async getDynatraceSecurityProblems(
     kubernetesId: string,
     riskAssessment: string,
     muted: string,
-  ): Promise<DynatraceVulnerabilities | undefined> {
+  ): Promise<DynatraceSecurityProblems | undefined> {
     if (!kubernetesId) {
       throw new Error('KubernetesId is required');
     }

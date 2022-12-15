@@ -35,7 +35,7 @@ export type DynatraceProblem = {
   affectedEntities: Array<DynatraceEntity>;
 };
 
-export type DynatraceVulnerability = {
+export type DynatraceSecurityProblem = {
   securityProblemId: string;
   status: string;
   vulnerabilityType: string;
@@ -78,8 +78,8 @@ export interface DynatraceProblems {
   pageSize: number;
 }
 
-export interface DynatraceVulnerabilities {
-  securityProblems: Array<DynatraceVulnerability>;
+export interface DynatraceSecurityProblems {
+  securityProblems: Array<DynatraceSecurityProblem>;
   totalCount: number;
   pageSize: number;
 }
@@ -98,9 +98,9 @@ export type DynatraceApi = {
   getDynatraceSyntheticLocationInfo(
     syntheticLocationId: string,
   ): Promise<DynatraceSyntheticLocationInfo | undefined>;
-  getDynatraceVulnerabilities(
+  getDynatraceSecurityProblems(
     kubernetesId: string,
     riskAssessment: string,
     muted: string,
-  ): Promise<DynatraceVulnerabilities | undefined>;
+  ): Promise<DynatraceSecurityProblems | undefined>;
 };

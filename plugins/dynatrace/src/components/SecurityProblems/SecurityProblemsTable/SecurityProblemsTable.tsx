@@ -15,12 +15,12 @@
  */
 import React from 'react';
 import { Table, TableColumn } from '@backstage/core-components';
-import { DynatraceVulnerability } from '../../../api/DynatraceApi';
-import { VulnerabilityStatus } from '../VulnerabilityStatus';
+import { DynatraceSecurityProblem } from '../../../api/DynatraceApi';
+import { SecurityProblemStatus } from '../SecurityProblemStatus';
 import { Link } from '@backstage/core-components';
 
 type VulnerabilityTableProps = {
-  vulnerabilities: DynatraceVulnerability[];
+  securityProblems: DynatraceSecurityProblem[];
   dynatraceBaseUrl: string;
 };
 
@@ -28,50 +28,50 @@ const parseTimestamp = (timestamp: number | undefined) => {
   return timestamp ? new Date(timestamp).toLocaleString() : 'N/A';
 };
 
-export const VulnerabilitiesTable = (props: VulnerabilityTableProps) => {
-  const { vulnerabilities } = props;
+export const SecurityProblemsTable = (props: VulnerabilityTableProps) => {
+  const { securityProblems } = props;
   const columns: TableColumn[] = [
     {
       title: 'Title',
       field: 'title',
-      render: (row: Partial<DynatraceVulnerability>) => (
+      render: (row: Partial<DynatraceSecurityProblem>) => (
         <Link to={`${row.url}`}>{row.title}</Link>
       ),
     },
     {
       title: 'Status',
       field: 'status',
-      render: (row: Partial<DynatraceVulnerability>) => (
-        <VulnerabilityStatus status={row.status} />
+      render: (row: Partial<DynatraceSecurityProblem>) => (
+        <SecurityProblemStatus status={row.status} />
       ),
     },
     {
       title: 'Risk Level',
       field: 'riskLevel',
-      render: (row: Partial<DynatraceVulnerability>) =>
+      render: (row: Partial<DynatraceSecurityProblem>) =>
         row.riskAssessment?.riskLevel,
     },
     {
       title: 'Exposure',
       field: 'exposure',
-      render: (row: Partial<DynatraceVulnerability>) =>
+      render: (row: Partial<DynatraceSecurityProblem>) =>
         row.riskAssessment?.exposure,
     },
     {
       title: 'Data Assets',
       field: 'dataAssets',
-      render: (row: Partial<DynatraceVulnerability>) =>
+      render: (row: Partial<DynatraceSecurityProblem>) =>
         row.riskAssessment?.dataAssets,
     },
     {
       title: 'Vulnerability Type',
       field: 'vulnerabilityType',
-      render: (row: Partial<DynatraceVulnerability>) => row.vulnerabilityType,
+      render: (row: Partial<DynatraceSecurityProblem>) => row.vulnerabilityType,
     },
     {
       title: 'Start Time',
       field: 'firstSeenTimestamp',
-      render: (row: Partial<DynatraceVulnerability>) =>
+      render: (row: Partial<DynatraceSecurityProblem>) =>
         parseTimestamp(row.firstSeenTimestamp),
     },
   ];
@@ -80,7 +80,7 @@ export const VulnerabilitiesTable = (props: VulnerabilityTableProps) => {
     <Table
       options={{ search: true, paging: true }}
       columns={columns}
-      data={vulnerabilities.map(v => {
+      data={securityProblems.map(v => {
         return { ...v, id: v.securityProblemId };
       })}
     />

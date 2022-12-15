@@ -14,31 +14,31 @@
  * limitations under the License.
  */
 import React from 'react';
-import { VulnerabilitiesTable } from './VulnerabilitiesTable';
+import { SecurityProblemsTable } from './SecurityProblemsTable';
 import { renderInTestApp, TestApiRegistry } from '@backstage/test-utils';
 import { securityProblems } from '../../../mocks/securityProblems.json';
 import { ApiProvider, ConfigReader } from '@backstage/core-app-api';
 import { configApiRef } from '@backstage/core-plugin-api';
 
-describe('VulnerabilitiesTable', () => {
+describe('SecurityProblemsTable', () => {
   const apis = TestApiRegistry.from([
     configApiRef,
     new ConfigReader({ dynatrace: { baseUrl: '__dynatrace__' } }),
   ]);
   it('renders the table with some vulnerability data', async () => {
-    const rendedred = await renderInTestApp(
+    const rendered = await renderInTestApp(
       <ApiProvider apis={apis}>
-        <VulnerabilitiesTable
-          vulnerabilities={securityProblems}
+        <SecurityProblemsTable
+          securityProblems={securityProblems}
           dynatraceBaseUrl="__dynatrace__"
         />
         ,
       </ApiProvider>,
     );
 
-    // Checking for Title from mocked vulnerabilities
+    // Checking for Title from mocked security problems
     expect(
-      await rendedred.findByText('this IS a big security problem'),
+      await rendered.findByText('this IS a big security problem'),
     ).toBeInTheDocument();
   });
 });

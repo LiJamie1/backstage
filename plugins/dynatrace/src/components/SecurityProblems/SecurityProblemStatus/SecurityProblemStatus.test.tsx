@@ -14,19 +14,19 @@
  * limitations under the License.
  */
 import React from 'react';
-import { VulnerabilityStatus } from './VulnerabilityStatus';
+import { SecurityProblemStatus } from './SecurityProblemStatus';
 import { renderInTestApp } from '@backstage/test-utils';
 
-describe('VulnerabilityStatus', () => {
-  it('renders StatusOK for a resolved vulnerability', async () => {
+describe('SecurityProblemStatus', () => {
+  it('renders StatusOK for a resolved security problem', async () => {
     const rendered = await renderInTestApp(
-      <VulnerabilityStatus status="resolved" />,
+      <SecurityProblemStatus status="resolved" />,
     );
     expect(await rendered.findByText('Resolved')).toBeInTheDocument();
   });
-  it('renders StatusError for a open vulnerability', async () => {
+  it('renders StatusError for a open security problem', async () => {
     const rendered = await renderInTestApp(
-      <VulnerabilityStatus status="open" />,
+      <SecurityProblemStatus status="open" />,
     );
     expect(await rendered.findByText('Open')).toBeInTheDocument();
   });

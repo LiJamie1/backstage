@@ -17,8 +17,8 @@ export type {
   DynatraceProblems,
   DynatraceProblem,
   DynatraceEntity,
-  DynatraceVulnerability,
-  DynatraceVulnerabilities,
+  DynatraceSecurityProblem,
+  DynatraceSecurityProblems,
 } from './DynatraceApi';
 export { dynatraceApiRef } from './DynatraceApi';
 export { DynatraceClient } from './DynatraceClient';

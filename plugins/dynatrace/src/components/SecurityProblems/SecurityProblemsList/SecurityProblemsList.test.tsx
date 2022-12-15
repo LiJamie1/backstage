@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import React from 'react';
-import { VulnerabilitiesList } from './VulnerabilitiesList';
+import { VulnerabilitiesList } from './SecurityProblemsList';
 import { renderInTestApp, TestApiRegistry } from '@backstage/test-utils';
 import { dynatraceApiRef } from '../../../api';
 import { securityProblems } from '../../../mocks/securityProblems.json';
