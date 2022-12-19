@@ -15,4 +15,5 @@
  */
 export const DYNATRACE_ID_ANNOTATION = 'dynatrace.com/dynatrace-entity-id';
 export const DYNATRACE_SYNTHETICS_ANNOTATION = 'dynatrace.com/synthetics-ids';
-export const KUBERNETES_ID_ANNOTATION = 'backstage.io/kubernetes-id';
+export const DYNATRACE_PROCESS_GROUP_NAME_ANNOTATION =
+  'dynatrace.com/process-group-name';

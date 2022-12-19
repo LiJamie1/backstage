@@ -27,7 +27,7 @@ import { isDynatraceAvailable } from '../../plugin';
 import {
   DYNATRACE_ID_ANNOTATION,
   DYNATRACE_SYNTHETICS_ANNOTATION,
-  KUBERNETES_ID_ANNOTATION,
+  DYNATRACE_PROCESS_GROUP_NAME_ANNOTATION,
 } from '../../constants';
 import { SecurityProblemsList } from '../SecurityProblems/SecurityProblemsList';
 
@@ -38,8 +38,8 @@ export const DynatraceTab = () => {
     return <MissingAnnotationEmptyState annotation={DYNATRACE_ID_ANNOTATION} />;
   }
 
-  const kubernetesId: string =
-    entity?.metadata.annotations?.[KUBERNETES_ID_ANNOTATION]!;
+  const processGroupName: string =
+    entity?.metadata.annotations?.[DYNATRACE_PROCESS_GROUP_NAME_ANNOTATION]!;
 
   const dynatraceEntityId: string =
     entity?.metadata.annotations?.[DYNATRACE_ID_ANNOTATION]!;
@@ -58,9 +58,9 @@ export const DynatraceTab = () => {
           ) : (
             ''
           )}
-          {kubernetesId ? (
+          {processGroupName ? (
             <Grid item xs={12} lg={12}>
-              <SecurityProblemsList kubernetesId={kubernetesId} />
+              <SecurityProblemsList processGroupName={processGroupName} />
             </Grid>
           ) : (
             ''

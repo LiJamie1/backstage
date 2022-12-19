@@ -26,7 +26,7 @@ import { dynatraceApiRef, DynatraceSecurityProblem } from '../../../api';
 import { InfoCard } from '@backstage/core-components';
 
 type SecurityProblemsListProps = {
-  kubernetesId: string;
+  processGroupName: string;
 };
 
 const cardContents = (
@@ -44,18 +44,18 @@ const cardContents = (
 };
 
 export const SecurityProblemsList = (props: SecurityProblemsListProps) => {
-  const { kubernetesId } = props;
+  const { processGroupName } = props;
   const configApi = useApi(configApiRef);
   const dynatraceApi = useApi(dynatraceApiRef);
   const dynatraceBaseUrl = configApi.getString('dynatrace.baseUrl');
 
   const { value, loading, error } = useAsync(async () => {
     return dynatraceApi.getDynatraceSecurityProblems(
-      kubernetesId,
+      processGroupName,
       'EXPOSED',
       'false',
     );
-  }, [dynatraceApi, kubernetesId]);
+  }, [dynatraceApi, processGroupName]);
   const securityProblems = value?.securityProblems;
   if (loading) {
     return <Progress />;
@@ -64,7 +64,7 @@ export const SecurityProblemsList = (props: SecurityProblemsListProps) => {
   }
 
   return (
-    <InfoCard title="Security Problems" subheader={`${kubernetesId}`}>
+    <InfoCard title="Security Problems" subheader={`${processGroupName}`}>
       {cardContents(securityProblems || [], dynatraceBaseUrl)}
     </InfoCard>
   );
