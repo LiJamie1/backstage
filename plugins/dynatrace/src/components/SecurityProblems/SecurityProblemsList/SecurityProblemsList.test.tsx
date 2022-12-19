@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 import React from 'react';
-import { VulnerabilitiesList } from './SecurityProblemsList';
+import { SecurityProblemsList } from './SecurityProblemsList';
 import { renderInTestApp, TestApiRegistry } from '@backstage/test-utils';
 import { dynatraceApiRef } from '../../../api';
 import { securityProblems } from '../../../mocks/securityProblems.json';
@@ -22,7 +22,7 @@ import { ApiProvider, ConfigReader } from '@backstage/core-app-api';
 import { configApiRef } from '@backstage/core-plugin-api';
 
 const mockDynatraceApi = {
-  getDynatraceVulnerabilities: jest.fn(),
+  getDynatraceSecurityProblems: jest.fn(),
 };
 const apis = TestApiRegistry.from(
   [dynatraceApiRef, mockDynatraceApi],
@@ -31,24 +31,24 @@ const apis = TestApiRegistry.from(
 
 describe('VulnerabilityStatus', () => {
   it('renders a table with security problem data', async () => {
-    mockDynatraceApi.getDynatraceVulnerabilities = jest
+    mockDynatraceApi.getDynatraceSecurityProblems = jest
       .fn()
       .mockResolvedValue({ securityProblems });
     const rendered = await renderInTestApp(
       <ApiProvider apis={apis}>
-        <VulnerabilitiesList kubernetesId="__kubernetes_id__" />
+        <SecurityProblemsList processGroupName="__process_group_name__" />
       </ApiProvider>,
     );
     expect(await rendered.findByText('example-service')).toBeInTheDocument();
   });
 
-  it('returns "No Vulnerabilities to Report!" if no security problems are found', async () => {
-    mockDynatraceApi.getDynatraceVulnerabilities = jest
+  it('returns "No Security Problems to Report!" if no security problems are found', async () => {
+    mockDynatraceApi.getDynatraceSecurityProblems = jest
       .fn()
       .mockResolvedValue({});
     const rendered = await renderInTestApp(
       <ApiProvider apis={apis}>
-        <VulnerabilitiesList kubernetesId="example-service-3" />
+        <SecurityProblemsList processGroupName="example-service-3" />
       </ApiProvider>,
     );
     expect(
