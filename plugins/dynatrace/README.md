@@ -53,6 +53,21 @@ metadata:
 
 The `DYNATRACE_ENTITY_ID` can be found in Dynatrace by browsing to the entity (a service, synthetic, frontend, workload, etc.). It will be located in the browser address bar in the `id` parameter and has the format `ENTITY_TYPE-ENTITY_ID`, where `ENTITY_TYPE` will be one of `SERVICE`, `SYNTHETIC_TEST`, or other, and `ENTITY_ID` will be a string of characters containing uppercase letters and numbers.
 
+##### Viewing Open Security Problems
+
+To show information from Dynatrace for active security problems related to the entry, add the following annotation to `catalog-info.yaml`:
+
+```yaml
+# catalog-info.yaml
+# [...]
+metadata:
+  annotations:
+    dynatrace.com/process-group-name: PROCESS_GROUP_NAME
+# [...]
+```
+
+The `DYNATRACE_PROCESS_GROUP_NAME` can be found in Dynatrace by accessing `Services` under the Applications & Microservices header in the side bar. Then `filter by name` and find the entity or project you wish to monitor. Once you find and click into the service you wish to monitor, click the `Properties and tags` drop down menu and locate the `Process Group` tag. Attached to this tag should be the process group name
+
 ##### Viewing Recent Synthetics Results
 
 To show recent results from a Synthetic Monitor, add the following annotation to `catalog-info.yaml`:
